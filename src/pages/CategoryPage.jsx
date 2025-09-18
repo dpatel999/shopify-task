@@ -22,9 +22,18 @@ export default function CategoryPage() {
     return () => (mounted = false);
   }, [category]);
 
-  const sorted = [...products].sort((a, b) =>
-    sortMode === "price_asc" ? a.price - b.price : b.price - a.price
-  );
+
+  const sorted = [...products].sort((a, b) => {
+  switch (sortMode) {
+    case "title_asc": return a.title.localeCompare(b.title);
+    case "title_desc": return b.title.localeCompare(a.title);
+    case "rating_desc": return b.rating.rate - a.rating.rate;
+    case "price_asc": return a.price - b.price;
+    case "price_desc": return b.price - a.price;
+    default: return 0;
+    }
+  });
+
 
   // interleave touts every 3 products
   const itemsWithTouts = [];
