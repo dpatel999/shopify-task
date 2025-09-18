@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "Stylishly Minimal",
+        "subtitle": "Sometimes simple says a lot",
+        "cta": "Buy Now",
+        "url": "/",
+        "image": "https://burst.shopifycdn.com/photos/woman-dressed-in-white-leans-against-a-wall.jpg?width=373&format=pjpg&exif=0&iptc=0"
+    },
+    {
+        "id": 2,
+        "title": "",
+        "subtitle": "",
+        "cta": "",
+        "url": "/",
+        "image": "https://burst.shopifycdn.com/photos/hands-holding-multiple-shopping-bags.jpg?width=373&format=pjpg&exif=0&iptc=0"
+    },
+    {
+        "id": 3,
+        "title": "Swim Sale",
+        "subtitle": "Dive into this collection",
+        "cta": "Buy now",
+        "url": "/",
+        "image": "https://burst.shopifycdn.com/photos/fun-swimming-products.jpg?width=373&format=pjpg&exif=0&iptc=0"
+    },
+    {
+        "id": 4,
+        "title": "Timeless pieces",
+        "subtitle": "",
+        "cta": "Buy Now",
+        "url": "/",
+        "image": "https://burst.shopifycdn.com/photos/stone-finish-analogue-watch.jpg?width=373&format=pjpg&exif=0&iptc=0"
+    },
+    {
+        "id": 5,
+        "title": "Bag this item now",
+        "subtitle": "",
+        "cta": "",
+        "url": "/",
+        "image": "https://burst.shopifycdn.com/photos/black-bag-over-the-shoulder.jpg?width=373&format=pjpg&exif=0&iptc=0"
+    }
+]
