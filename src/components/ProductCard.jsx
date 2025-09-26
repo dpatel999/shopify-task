@@ -1,8 +1,5 @@
-// src/components/ProductCard.jsx
-import React from 'react';
 import { useCart } from "../context/useCart";
 
-// src/components/ProductCard.jsx
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
 
@@ -34,7 +31,7 @@ export default function ProductCard({ product }) {
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-3 w-full rounded-md bg-black px-3 py-2 text-sm font-medium text-white hover:bg-gray-800"
+        className="mt-3 w-full rounded-md bg-black px-3 py-2 text-sm font-medium hover:bg-gray-800"
       >
         Add to Cart
       </button>

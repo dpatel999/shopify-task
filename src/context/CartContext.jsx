@@ -60,10 +60,9 @@ export function CartProvider({ children }) {
         dispatch({ type: "INIT", payload: parsed });
       }
     }
-    setHydrated(true); // ✅ Mark as loaded
+    setHydrated(true);
   }, []);
 
-  // Save cart to localStorage (only after hydration)
   useEffect(() => {
     if (hydrated) {
       localStorage.setItem("cart_v1", JSON.stringify(state.items));

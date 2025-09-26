@@ -16,7 +16,6 @@ export default function CartPage() {
       await updateQuantity(id, newQty);
     } catch (err) {
       console.error('failed update', err);
-      // show toast in real app
     } finally {
       setUpdatingId(null);
     }
