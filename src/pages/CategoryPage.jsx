@@ -10,7 +10,7 @@ import SortDropdown from "../components/SortDropdown";
 export default function CategoryPage() {
   const { category } = useParams();   //grab route param
   const [products, setProducts] = useState([]);
-  const [sortMode, setSortMode] = useState("price_asc");
+  const [sortMode, setSortMode] = useState("title_asc");
 
   useEffect(() => {
     let mounted = true;
@@ -46,23 +46,28 @@ export default function CategoryPage() {
       toutIndex++;
     }
   }
-
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-semibold capitalize">{category}</h1>
-        <SortDropdown value={sortMode} onChange={setSortMode} />
-      </div>
+<div className="bg-white">
+  <div className="mx-auto w-full px-4 py-16 sm:px-6 sm:py-24 lg:px-8 max-w-7xl">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {itemsWithTouts.map((it, idx) =>
-          it.type === "product" ? (
-            <ProductCard key={`p-${it.payload.id}`} product={it.payload} />
-          ) : (
-            <Tout key={`t-${idx}`} tout={it.payload} />
-          )
-        )}
-      </div>
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
+      <h1 className="text-2xl font-bold tracking-tight text-gray-900 capitalize">
+        {category}
+      </h1>
+      <SortDropdown value={sortMode} onChange={setSortMode} />
     </div>
+
+    <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-8 mb-8">
+      {itemsWithTouts.map((it, idx) =>
+        it.type === "product" ? (
+          <ProductCard key={`p-${it.payload.id}`} product={it.payload} />
+        ) : (
+          <Tout key={`t-${idx}`} tout={it.payload} />
+        )
+      )}
+    </div>
+  </div>
+</div>
+
   );
-}
+};

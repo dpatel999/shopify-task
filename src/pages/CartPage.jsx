@@ -23,16 +23,16 @@ export default function CartPage() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Cart</h2>
+<div className="container mx-auto p-4">
+  <h2 className="text-2xl font-semibold mb-6">Shopping Cart</h2>
 
       {items.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
         <div className="space-y-4">
           {items.map(it => (
-            <div key={it.id} className="flex items-center gap-4 bg-white p-3 rounded shadow">
-              <img src={it.image} alt={it.title} className="w-20 h-20 object-cover" />
+            <div key={it.id} className="flex items-center bg-white p-4 rounded-lg shadow gap-4">
+              <img src={it.image} alt={it.title} className="w-20 h-20 object-contain" />
               <div className="flex-1">
                 <div className="font-medium">{it.title}</div>
                 <div className="text-sm">${it.price.toFixed(2)}</div>

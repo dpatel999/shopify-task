@@ -1,4 +1,3 @@
-// src/context/CartContext.jsx
 import React, { createContext, useEffect, useReducer, useState } from "react";
 
 const CartContext = createContext();
@@ -6,18 +5,16 @@ const CartContext = createContext();
 const initialState = { items: [] };
 
 function reducer(state, action) {
-  console.log("🌀 Reducer called with:", action);
+  console.log("Reducer called with:", action);
 
   switch (action.type) {
     case "INIT": {
-      console.log("🔄 INIT with", action.payload);
       return { items: action.payload };
     }
     case "ADD": {
-      console.log("➕ ADD", action.payload);
       const exists = state.items.find(i => i.id === action.payload.id);
       if (exists) {
-        console.log("✅ Item already in cart, incrementing:", exists);
+        console.log("already in cart, incrementing:", exists);
         return {
           items: state.items.map(i =>
             i.id === action.payload.id
@@ -26,13 +23,12 @@ function reducer(state, action) {
           ),
         };
       }
-      console.log("🆕 Adding new item:", action.payload);
+      console.log("Adding new item:", action.payload);
       return {
         items: [...state.items, { ...action.payload, quantity: 1 }],
       };
     }
     case "SET_QUANTITY": {
-      console.log("✏️ SET_QUANTITY", action.payload);
       return {
         items: state.items.map(i =>
           i.id === action.payload.id
@@ -42,13 +38,11 @@ function reducer(state, action) {
       };
     }
     case "REMOVE": {
-      console.log("🗑️ REMOVE", action.payload.id);
       return {
         items: state.items.filter(i => i.id !== action.payload.id),
       };
     }
     default:
-      console.warn("⚠️ Unknown action:", action.type);
       return state;
   }
 }
@@ -63,7 +57,6 @@ export function CartProvider({ children }) {
     if (stored) {
       const parsed = JSON.parse(stored);
       if (parsed.length > 0) {
-        console.log("✅ Restoring cart from localStorage:", parsed);
         dispatch({ type: "INIT", payload: parsed });
       }
     }
@@ -73,18 +66,15 @@ export function CartProvider({ children }) {
   // Save cart to localStorage (only after hydration)
   useEffect(() => {
     if (hydrated) {
-      console.log("💾 Saving cart to localStorage:", state.items);
       localStorage.setItem("cart_v1", JSON.stringify(state.items));
     }
   }, [state.items, hydrated]);
 
   async function addToCart(product) {
-    console.log("🛒 addToCart called with:", product);
     dispatch({ type: "ADD", payload: product });
   }
 
   async function updateQuantity(id, newQty) {
-    console.log("🔧 updateQuantity called for", id, "→", newQty);
     await new Promise(res => setTimeout(res, 400)); // fake API delay
     if (newQty <= 0) {
       dispatch({ type: "REMOVE", payload: { id } });

@@ -6,116 +6,118 @@ import { fetchCategories } from "../api";
 
 export default function NavBar() {
   const { items } = useCart();
-  const totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
+  const totalQty = items.reduce((sum, i) => sum + (i.quantity || 0), 0);
 
   const [categories, setCategories] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
 
   useEffect(() => {
-    fetchCategories().then(setCategories);
+    fetchCategories()
+      .then(setCategories)
+      .catch(() => setCategories([])); 
   }, []);
 
   return (
-    <nav className="bg-black text-white">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="font-bold text-xl">
-          MyShop
-        </Link>
+    <header className="bg-white shadow-sm z-40">
+      {/* center wrapper */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="flex items-center justify-between h-16">
+          {/* LEFT: Logo + desktop nav */}
+          <div className="flex items-center px-4 sm:px-6 lg:px-8">
+            <Link to="/" className="text-2xl font-bold">
+              Darsh's Shop
+            </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6 relative">
-          <Link to="/" className="hover:text-gray-300">
-            Home
-          </Link>
+            <nav className="hidden md:flex items-center space-x-6">
 
-          {/* Categories Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setCatOpen(true)}
-            onMouseLeave={() => setCatOpen(false)}
-          >
-            <button className="hover:text-gray-300">Categories ▾</button>
-            {catOpen && (
-              <div className="absolute left-0 mt-2 bg-white text-black rounded shadow-lg w-48 z-50">
-                {categories.map(cat => (
-                  <Link
-                    key={cat}
-                    to={`/category/${cat}`}
-                    className="block px-4 py-2 hover:bg-gray-200 capitalize"
+              <div
+                className="relative"
+                onMouseEnter={() => setCatOpen(true)}
+                onMouseLeave={() => setCatOpen(false)}
+              >
+
+                {catOpen && (
+                  <div
+                    className="absolute left-0 mt-2 w-48 bg-white border rounded-md shadow-lg overflow-hidden"
+                    role="menu"
+                    onMouseEnter={() => setCatOpen(true)}
+                    onMouseLeave={() => setCatOpen(false)}
                   >
-                    {cat}
-                  </Link>
-                ))}
+                    {categories.map((cat) => (
+                      <Link
+                        key={cat}
+                        to={`/category/${encodeURIComponent(cat)}`}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 capitalize"
+                      >
+                        {cat}
+                      </Link>
+                    ))}
+                    {categories.length === 0 && (
+                      <div className="px-4 py-2 text-sm text-gray-500">No categories</div>
+                    )}
+                  </div>
+                )}
               </div>
-            )}
+            </nav>
           </div>
 
-          {/* Cart with badge */}
-          <Link to="/cart" className="relative hover:text-gray-300">
-            Cart
-            {totalQty > 0 && (
-              <span className="absolute -top-2 -right-3 bg-red-600 text-xs px-2 py-0.5 rounded-full">
-                {totalQty}
-              </span>
-            )}
-          </Link>
-        </div>
+          <div className="flex items-center">
+            <Link
+              to="/cart"
+              className="relative mr-4 text-sm text-gray-700 hover:text-gray-900"
+            >
+              Cart
+              {totalQty > 0 && (
+                <span className="ml-2 inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-600 text-white">
+                  {totalQty}
+                </span>
+              )}
+            </Link>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? "✖" : "☰"}
-        </button>
+            {/* mobile hamburger */}
+            <button
+              className="md:hidden p-2 rounded-md focus:outline-none"
+              onClick={() => setMobileOpen((s) => !s)}
+              aria-expanded={mobileOpen}
+            >
+              <span className="sr-only">Open menu</span>
+              {mobileOpen ? "✖" : "☰"}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {menuOpen && (
-        <div className="md:hidden bg-gray-800 px-4 py-2 space-y-2">
-          <Link
-            to="/"
-            className="block hover:text-gray-300"
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
-          </Link>
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t">
+          <div className="px-4 py-3 space-y-2">
+            <Link to="/" className="block text-sm text-gray-700" onClick={() => setMobileOpen(false)}>
+              Home
+            </Link>
 
-          {/* Mobile categories */}
-          <details>
-            <summary className="cursor-pointer hover:text-gray-300">
-              Categories
-            </summary>
-            <div className="ml-4 space-y-1">
-              {categories.map(cat => (
-                <Link
-                  key={cat}
-                  to={`/category/${cat}`}
-                  className="block hover:text-gray-300 capitalize"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {cat}
-                </Link>
-              ))}
-            </div>
-          </details>
+            
+              <div className="ml-2 space-y-1">
+                {categories.map((c) => (
+                  <Link
+                    key={c}
+                    to={`/category/${encodeURIComponent(c)}`}
+                    className="block text-sm text-gray-700 capitalize"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                ))}
+                {categories.length === 0 && <div className="text-sm text-gray-500">No categories</div>}
+              </div>
 
-          <Link
-            to="/cart"
-            className="block relative hover:text-gray-300"
-            onClick={() => setMenuOpen(false)}
-          >
-            Cart
-            {totalQty > 0 && (
-              <span className="absolute left-12 top-0 bg-red-600 text-xs px-2 py-0.5 rounded-full">
-                {totalQty}
-              </span>
-            )}
-          </Link>
+            <Link to="/cart" className="block text-sm text-gray-700" onClick={() => setMobileOpen(false)}>
+              Cart
+            </Link>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
+
+    
   );
 }

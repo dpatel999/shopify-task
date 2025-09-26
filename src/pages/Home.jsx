@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchCategories } from "../api";
@@ -13,19 +12,28 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Shop by Category</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {categories.map((cat) => (
-          <Link
-            key={cat}
-            to={`/category/${cat}`}
-            className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition"
-          >
-            <h2 className="text-xl capitalize font-medium">{cat}</h2>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <main className="w-full bg-gray-50 min-h-screen">
+      <section className="w-full bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+            Shop By Categories
+          </h1>
+
+          <div className="mt-10 w-full">
+            <div className="grid grid-cols-1 gap-4">
+              {categories.map((cat) => (
+                <Link
+                  key={cat}
+                  to={`/category/${encodeURIComponent(cat)}`}
+                  className="bg-white rounded-lg sm:px-4 lg:px-6 py-20  text-center shadow-sm hover:shadow-md capitalize"
+                >
+                  {cat}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
