@@ -1,7 +1,18 @@
 import { useCart } from "../context/useCart";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ProductCard({ product }) {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
+
+    const { addToCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleAddToCart = async () => {
+    addToCart(product);        // add item
+    navigate("/cart");         // redirect to cart
+  };
+
 
   return (
     <div className="group relative flex flex-col">
@@ -30,7 +41,7 @@ export default function ProductCard({ product }) {
       </div>
 
       <button
-        onClick={() => addToCart(product)}
+        onClick={() => handleAddToCart(product)}
         className="mt-3 w-full rounded-md bg-black px-3 py-2 text-sm font-medium hover:bg-gray-800"
       >
         Add to Cart
