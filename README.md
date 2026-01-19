@@ -2,11 +2,57 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# Shopify Assessment – React + Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a Shopify-style storefront built using **React**, **React Router**, **Context API (Cart)**, and **Tailwind CSS**.  
+It includes a homepage, collection pages, product listing, promotional touts, and a fully functional cart with quantity management and subtotal.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📥 Installation & Setup
+
+- git clone https://github.com/dpatel999/shopify-task/
+- cd shopify-task
+- npm install
+- npm run dev
+---
+
+## 🚀 Tech Stack
+
+- React (Vite-based setup)
+- React Router
+- Context API (Cart state)
+- Tailwind CSS (v4 – manual setup)
+- JavaScript (ES6+)
+
+---
+
+## 📦 Features
+
+- Full-width responsive homepage
+- Collection pages with:
+  - Responsive product grid
+  - Promotional touts mixed into products
+  - Sorting (price ascending / descending)
+- Product cards with **Add to Cart**
+- Cart page:
+  - Quantity increment / decrement
+  - Subtotal calculation
+  - Total item count
+- Global responsive navigation bar
+- Mobile-first layout
+
+---
+
+## 🛠️ Prerequisites
+
+Make sure the following are installed on your machine:
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+Verify versions:
+
+```bash
+node -v
+npm -v
