@@ -5,8 +5,6 @@ import { fetchCategories } from "../api";
 export default function Home() {
   const [categories, setCategories] = useState([]);
 
-  console.log(categories);
-
   useEffect(() => {
     fetchCategories().then(setCategories);
   }, []);
